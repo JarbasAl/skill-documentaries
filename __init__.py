@@ -1,8 +1,8 @@
 from mycroft.skills.core import intent_file_handler
 from pyvod import Collection, Media
 from os.path import join, dirname, basename
-from ovos_workshop.frameworks.playback import CPSMatchType, CPSPlayback, \
-    CPSMatchConfidence
+from ovos_workshop.frameworks.playback import CommonPlayMediaType, CommonPlayPlaybackType, \
+    CommonPlayMatchConfidence
 from ovos_workshop.skills.video_collection import VideoCollectionSkill
 
 
@@ -21,13 +21,13 @@ class DocumentariesSkill(VideoCollectionSkill):
         self.default_bg =  join(dirname(__file__), "ui",
                                 "bg.jpeg")
         self.settings["match_description"] = True
-        self.media_type = CPSMatchType.DOCUMENTARY
-        self.playback_type = CPSPlayback.AUDIO
+        self.media_type = CommonPlayMediaType.DOCUMENTARY
+        self.playback_type = CommonPlayPlaybackType.AUDIO
         self.media_collection = Collection("Documentaries",
                                            logo=self.skill_logo, db_path=path)
-        self.supported_media = [CPSMatchType.GENERIC,
-                                CPSMatchType.DOCUMENTARY,
-                                CPSMatchType.VIDEO]
+        self.supported_media = [CommonPlayMediaType.GENERIC,
+                                CommonPlayMediaType.DOCUMENTARY,
+                                CommonPlayMediaType.VIDEO]
 
     def get_intro_message(self):
         self.speak_dialog("intro")
@@ -45,11 +45,11 @@ class DocumentariesSkill(VideoCollectionSkill):
         score = 0
 
         if self.voc_match(phrase, "video") or \
-                media_type == CPSMatchType.VIDEO:
+                media_type == CommonPlayMediaType.VIDEO:
             score += 5
 
         if self.voc_match(phrase, "documentaries") or \
-                media_type == CPSMatchType.DOCUMENTARY:
+                media_type == CommonPlayMediaType.DOCUMENTARY:
             score += 20
 
         if self.voc_match(phrase, "reddit"):
