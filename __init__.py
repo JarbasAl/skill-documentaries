@@ -25,8 +25,7 @@ class DocumentariesSkill(VideoCollectionSkill):
         self.playback_type = CommonPlayPlaybackType.AUDIO
         self.media_collection = Collection("Documentaries",
                                            logo=self.skill_logo, db_path=path)
-        self.supported_media = [CommonPlayMediaType.GENERIC,
-                                CommonPlayMediaType.DOCUMENTARY,
+        self.supported_media = [CommonPlayMediaType.DOCUMENTARY,
                                 CommonPlayMediaType.VIDEO]
 
     def get_intro_message(self):
